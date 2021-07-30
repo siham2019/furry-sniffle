@@ -1,12 +1,36 @@
 <template>
   <div id="app">
-    <div id="nav">
+
+  <!--   <div id="nav">
       <router-link to="/">Home</router-link> |
       <router-link to="/about">About</router-link>
     </div>
-    <router-view/>
+    <router-view/> -->
+    
+    <h2>hello kamélia</h2>
+     <HelloWorld name="smith" vegetable="tomato" />
+      <TypeAndBinding/>
+      <EventsAndDirective/>
+  
   </div>
 </template>
+
+<script>
+import EventsAndDirective from './components/EventsAndDirective.vue'
+
+import HelloWorld from './components/HelloWorld.vue'
+import TypeAndBinding from './components/TypesAndBinding.vue'
+
+export default {
+  name:"App",
+  components:{
+     HelloWorld,
+     TypeAndBinding,
+    EventsAndDirective
+  }
+}
+</script>
+
 
 <style>
 #app {
