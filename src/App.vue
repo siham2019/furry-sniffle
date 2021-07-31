@@ -9,9 +9,11 @@
       <router-link to="/class_style_bind">class style binding</router-link>    |
       <router-link to="/compute_watch"> compute watch </router-link>
         |
-      <router-link to="/event_directive"> event directive </router-link>
+      <router-link to="/event_directive"> event directive </router-link>      |
+       <router-link to="/route_tuto"> router tuto </router-link>
     
-    </div>
+  </div>
+  
     <router-view/> 
     
 
