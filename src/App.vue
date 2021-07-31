@@ -1,33 +1,31 @@
 <template>
   <div id="app">
 
-  <!--   <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>
-    <router-view/> -->
+ <div id="nav">
     
-    <h2>hello kamélia</h2>
-     <HelloWorld name="smith" vegetable="tomato" />
-      <TypeAndBinding/>
-      <EventsAndDirective/>
-  
+      <router-link to="/type_bind">types of data & attribute binding</router-link>  |
+      <router-link to="/props"> props </router-link>  |
+      <router-link to="/event_modifier"> event modifier </router-link>  |
+      <router-link to="/class_style_bind">class style binding</router-link>    |
+      <router-link to="/compute_watch"> compute watch </router-link>
+        |
+      <router-link to="/event_directive"> event directive </router-link>
+    
+    </div>
+    <router-view/> 
+    
+
+
   </div>
 </template>
 
 <script>
-import EventsAndDirective from './components/EventsAndDirective.vue'
 
-import HelloWorld from './components/HelloWorld.vue'
-import TypeAndBinding from './components/TypesAndBinding.vue'
+
 
 export default {
   name:"App",
-  components:{
-     HelloWorld,
-     TypeAndBinding,
-    EventsAndDirective
-  }
+
 }
 </script>
 
