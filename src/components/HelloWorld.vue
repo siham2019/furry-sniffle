@@ -2,6 +2,9 @@
 
   <div>
      mr {{name}} eat {{ vegetable }}
+     <button v-on:click="login()">login</button>
+     <button v-on:click="logout()">logout</button>
+     <button v-on:click="goHome()">go to home </button>
   </div>
 
 
@@ -11,11 +14,34 @@
 
 <script>
 
+import vueRouter from 'vue-router'
+
+let {isNavigationFailure,NavigationFailureType} = vueRouter;
+
 export default {
   name: 'HelloWorld',
   props: {
     name: String,
     vegetable:String
+  },
+  methods:{
+    login(){
+       sessionStorage.setItem('login',true)
+    },
+    logout(){
+       sessionStorage.removeItem('login')
+     
+    },
+    goHome(){
+
+      this.$router.push("/props").catch((failure)=>{
+       
+       if(isNavigationFailure(failure,NavigationFailureType.duplicated))
+         console.log(failure.to);
+
+      })
+
+    }
   }
 }
 

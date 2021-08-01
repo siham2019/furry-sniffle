@@ -3,13 +3,7 @@
 
  <div id="nav">
     
-      <router-link to="/type_bind">types of data & attribute binding</router-link>  |
       <router-link to="/props"> props </router-link>  |
-      <router-link to="/event_modifier"> event modifier </router-link>  |
-      <router-link to="/class_style_bind">class style binding</router-link>    |
-      <router-link to="/compute_watch"> compute watch </router-link>
-        |
-      <router-link to="/event_directive"> event directive </router-link>      |
        <router-link to="/route_tuto"> router tuto </router-link>
     
   </div>

@@ -2,22 +2,15 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 
 
-import TypesAndBinding from '../components/TypesAndBinding.vue'
 import HelloWorld from '../components/HelloWorld.vue'
-import EventsAndDirective from '../components/EventsAndDirective.vue'
-import ClassAndStyleBinding from '../components/ClassAndStyleBinding.vue'
-import EventModifier from '../components/EventModifier.vue'
-import ComputeWatch from '../components/ComputeWatch.vue'
-import RouterTuto from '../components/RouterTuto.vue'
-import DollaRoute from "../components/DollaRoute.vue"
-import DynamicRoutes from '../components/DynamicRoutes.vue'
-import User from '../components/User.vue'
+import Dashboard from '../components/Dashboard.vue'
+import Product from '../components/Product.vue'
+import Transition from '../components/Transition.vue'
+import FetchBefore from '../components/FetchBefore.vue'
+import FetchAfter from '../components/FetchAfter.vue'
+import Scroll from '../components/Scroll.vue'
+
 import F404 from "../components/404.vue"
-import ProgramaticNavigation from "../components/ProgramaticNavigation.vue"
-import NamedRouter from '../components/NamedRouter.vue'
-import Baz from '../components/Baz.vue'
-import Faz from '../components/Faz.vue'
-import NamedView from '../components/NamedView.vue'
 
 
 
@@ -27,12 +20,12 @@ const routes = [
   {
     path:"/",
     component: HelloWorld,
+    props:{
+       name:"jiji",
+       vegetable:"nana"
+    },
     alias:"/b"
  },
-   {
-     path:"/type_bind",
-     component : TypesAndBinding
-   },
    {
      path:"/props",
      component : HelloWorld,
@@ -41,91 +34,108 @@ const routes = [
        vegetable : "popcorn"
      }
    },
-   {
-     path:"/class_style_bind",
-     component:ClassAndStyleBinding
-   },
 
-   {
-     path:"/event_modifier",
-     component:EventModifier
-   }
-   ,
-   {
-     path:"/compute_watch",
-     component:ComputeWatch
-   } ,
-   {
-     path:"/event_directive",
-     component:EventsAndDirective
-   },
+  
    {
      path:"/route_tuto",
-     component:RouterTuto,
-     children:[
-         {
-           path:"/router",
-           component:DollaRoute
-         },  {
-          path:"/named/:id",
-          component:NamedRouter,
-          name:"named",
-          props:true
-        },{
-          path:"/namedv",
-          components:{
-            default : NamedView,
-            a: Baz,
-            b:Faz
-          },
-          
+     component:()=>import("../components/RouterTuto.vue"),
+     children:[  
+       {
+           path:"/dashboard",
+           component:Dashboard,
+           meta:{
+             required_auth :true
+            }
+  
         },
         {
-           path:"/p",
-           redirect:"/dynamic"
-        },
+        path:"/profile",
+        component: ()=>import('../components/Profile.vue'),
+        meta:{
+          required_auth :true
+        }
+      },{
+        path:"/something",
+         component: ()=>import('../components/Something.vue'),
        
-         {
-           path:"/dynamic",
-            component:DynamicRoutes,
-            children:[
-              {
-                path:"/user/:id",
-                component:User
-              }
-            ]
-         },
-         {
-          path:"/programatic",
-          component:ProgramaticNavigation
-        },
-     ]
-   },
- 
+      },{
+        path:"/transition",
+         component:Transition,
+       
+      },{
+        path:"/scroll",
+         component:Scroll,
+       name:"scroll"
+      }
+      ,{
+        path:"/after",
+         component:FetchAfter,
+       
+      },
+      {
+        path:"/before",
+         component:FetchBefore,
+       
+      },
+      {
+        path:"/product",
+        component:Product,
+        beforeEnter: (to, from, next) => {
+          if(sessionStorage.getItem("login"))
+          next()
+          else 
+          next("/")
+        }
+      }
+      ]
+    },
    {
      path:"*",
      component:F404
    }
 
-/*   {
-    path: '/',
-    name: 'Home',
-    component: Home
-  },
-  {
-    path: '/about',
-    name: 'About',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" '../views/About.vue') 
-  } */
 ]
 
-const router = new VueRouter({
-/*   mode: 'history',
-  base: process.env.BASE_URL, */
-  routes
+/** Grouping Components in the Same Chunk
+
+ *  const Foo = () => import(*//* webpackChunkName: "group-foo" */  /* './Foo.vue')
+*/
+
+
+ const router = new VueRouter({
+  mode: 'history',
+  base: process.env.BASE_URL,
+  routes,
+  scrollBehavior (to,from,savedPosition) {
+    if(to.hash){
+      return {
+        selector:to.hash,
+        behavior:"smooth"
+      }
+    }
+    else if(savedPosition){
+      return savedPosition
+    }
+    else 
+    return {x:0,y:0}
+  }
 })
+
+router.beforeEach((to,from,next)=>{
+    
+      if (to.matched.some(record=> record.meta.required_auth)) {
+       
+         if (sessionStorage.getItem("login")) {
+            next()
+          }else{
+             next("/")
+            }
+
+     }
+     else 
+       next()
+})
+
+
 
 export default router
