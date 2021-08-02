@@ -3,8 +3,16 @@
 
  <div id="nav">
     
-      <router-link to="/props"> props </router-link>  |
-       <router-link to="/route_tuto"> router tuto </router-link>
+    
+    <h2> components basics </h2>
+   
+    <router-link to="/child-event">Listening to Child Components Events</router-link> |
+      <router-link to="/dynamic">dynamic component</router-link>
+    
+
+     <table>
+        <tr is="Product"></tr>
+     </table>
     
   </div>
   
@@ -16,12 +24,15 @@
 </template>
 
 <script>
-
+ 
+ import Product from './components/Product.vue'
 
 
 export default {
   name:"App",
-
+  components :{
+    Product
+  }
 }
 </script>
 
