@@ -7,8 +7,9 @@
     <h2> components basics </h2>
    
     <router-link to="/child-event">Listening to Child Components Events</router-link> |
-      <router-link to="/dynamic">dynamic component</router-link>
-    
+    <router-link to="/dynamic">dynamic component</router-link> |
+     <router-link to="/somthinga">props</router-link>
+
 
      <table>
         <tr is="Product"></tr>

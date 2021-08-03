@@ -7,6 +7,8 @@ import HelloWorld from '../components/HelloWorld.vue'
 import F404 from "../components/404.vue"
 import Hihi from '../components/Hihi.vue'
 import Dynamic from '../components/Dynamic.vue'
+import Something from '../components/Something.vue'
+
 
 Vue.use(VueRouter)
 
@@ -23,6 +25,11 @@ const routes = [
       component: Hihi,
      
    },
+   {
+     path:"/somthinga",
+     component: Something,
+    
+  },
     {
       path:"/dynamic",
       component: Dynamic,
