@@ -8,7 +8,7 @@ import F404 from "../components/404.vue"
 import Hihi from '../components/Hihi.vue'
 import Dynamic from '../components/Dynamic.vue'
 import Something from '../components/Something.vue'
-
+import Parent from '../components/Parent.vue'
 
 Vue.use(VueRouter)
 
@@ -24,6 +24,11 @@ const routes = [
       path:"/child-event",
       component: Hihi,
      
+   }
+   ,{
+    path:"/slot",
+    component: Parent,
+   
    },
    {
      path:"/somthinga",
